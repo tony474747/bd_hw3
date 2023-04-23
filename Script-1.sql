@@ -1,13 +1,16 @@
+--создаем таблицу жанр
 CREATE TABLE IF NOT EXISTS Genre (
-	genre_id INT PRIMARY KEY,
+	genre_id SERIAL PRIMARY KEY,
 	name VARCHAR(80) UNIQUE NOT NULL
 );
 
+----создаем таблицу исполнитель
 CREATE TABLE IF NOT EXISTS Executor (
-	executor_id INT PRIMARY KEY,
-	name VARCHAR(80) NOT NULL
+	executor_id SERIAL PRIMARY KEY,
+	name VARCHAR(80) UNIQUE NOT NULL
 );
 
+--создаем таблицу зависимости жанр-исполнитель
 CREATE TABLE IF NOT EXISTS GenreExecutor (
 	genre_id INT,
 	executor_id INT,
@@ -16,12 +19,14 @@ CREATE TABLE IF NOT EXISTS GenreExecutor (
 	FOREIGN KEY (executor_id) REFERENCES Executor(executor_id)
 );
 
-CREATE TABLE IF NOT EXISTS Albummums (
-	album_id INT PRIMARY KEY,
+----создаем таблицу альбом
+CREATE TABLE IF NOT EXISTS Album (
+	album_id SERIAL PRIMARY KEY,
 	name VARCHAR(80) UNIQUE NOT NULL,
-	years INT NOT NULL
+	year INT NOT NULL
 );
 
+--создаем таблицу зависимости исполнитель-альбом
 CREATE TABLE IF NOT EXISTS ExecutorAlbum (
 	album_id INT,
 	executor_id INT,
@@ -30,24 +35,27 @@ CREATE TABLE IF NOT EXISTS ExecutorAlbum (
 	FOREIGN KEY (executor_id) REFERENCES Executor(executor_id)
 );
 
+--создаем таблицу трек
 CREATE TABLE IF NOT EXISTS Track (
-	track_id int PRIMARY KEY,
+	track_id SERIAL PRIMARY KEY,
 	name VARCHAR(80) NOT NULL,
-	length INT NOT NULL,
+	length VARCHAR(20) NOT NULL,
 	album_id INT NOT NULL,
 	FOREIGN KEY (album_id) REFERENCES Album(album_id)
 );
 
-CREATE TABLE IF NOT EXISTS Сollection (
-	collection_id INT PRIMARY KEY,
+--создаем таблицу сборник
+CREATE TABLE IF NOT EXISTS collection (
+	collection_id SERIAL PRIMARY KEY,
 	name VARCHAR(80) UNIQUE NOT NULL,
-	years INT NOT NULL
+	year INT NOT NULL
 );
 
+--создаем таблицу зависимости трек-сборник
 CREATE TABLE IF NOT EXISTS TrackCollection (
 	track_id INT,
 	collection_id INT,
 	PRIMARY KEY (track_id, collection_id),
 	FOREIGN KEY (track_id) REFERENCES Track(track_id),
-	FOREIGN KEY (collection_id) REFERENCES Collection(collection_id)
+	FOREIGN KEY (collection_id) REFERENCES collection(collection_id)
 );
