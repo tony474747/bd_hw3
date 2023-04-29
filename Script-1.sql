@@ -1,13 +1,13 @@
 --создаем таблицу жанр
 CREATE TABLE IF NOT EXISTS Genre (
 	genre_id SERIAL PRIMARY KEY,
-	name VARCHAR(80) UNIQUE NOT NULL
+	name_genre VARCHAR(80) UNIQUE NOT NULL
 );
 
 ----создаем таблицу исполнитель
 CREATE TABLE IF NOT EXISTS Executor (
 	executor_id SERIAL PRIMARY KEY,
-	name VARCHAR(80) UNIQUE NOT NULL
+	name_executor VARCHAR(80) UNIQUE NOT NULL
 );
 
 --создаем таблицу зависимости жанр-исполнитель
@@ -22,8 +22,8 @@ CREATE TABLE IF NOT EXISTS GenreExecutor (
 ----создаем таблицу альбом
 CREATE TABLE IF NOT EXISTS Album (
 	album_id SERIAL PRIMARY KEY,
-	name VARCHAR(80) UNIQUE NOT NULL,
-	year INT NOT NULL
+	name_album VARCHAR(80) UNIQUE NOT NULL,
+	year_album INT NOT NULL
 );
 
 --создаем таблицу зависимости исполнитель-альбом
@@ -38,8 +38,8 @@ CREATE TABLE IF NOT EXISTS ExecutorAlbum (
 --создаем таблицу трек
 CREATE TABLE IF NOT EXISTS Track (
 	track_id SERIAL PRIMARY KEY,
-	name VARCHAR(80) NOT NULL,
-	length VARCHAR(20) NOT NULL,
+	name_track VARCHAR(80) NOT NULL,
+	length_track int NOT NULL,
 	album_id INT NOT NULL,
 	FOREIGN KEY (album_id) REFERENCES Album(album_id)
 );
